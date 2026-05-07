@@ -18,7 +18,7 @@ const {
   deleteTask,
   clearCompleted,
   updateTask,
-} = useTasks(userId.value)
+} = useTasks()
 
 const copyFeedback = ref(false)
 const overlayUrl = computed(() => {
@@ -27,10 +27,10 @@ const overlayUrl = computed(() => {
 })
 
 onMounted(() => {
-  if (userId.value) subscribeToTasks()
+  if (userId.value) subscribeToTasks(userId.value)
 })
 
-watch(userId, (id) => { if (id) subscribeToTasks() })
+watch(userId, (id) => { if (id) subscribeToTasks(id) })
 
 const completedCount = computed(() => tasks.value.filter(t => t.completed).length)
 const progress = computed(() => tasks.value.length === 0 ? 0 : Math.round((completedCount.value / tasks.value.length) * 100))

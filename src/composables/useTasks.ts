@@ -8,26 +8,22 @@ import {
   updateDoc,
   deleteDoc,
   doc,
-  where,
-  getDocs,
-  Timestamp,
   Unsubscribe,
 } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import type { Task } from '@/types'
 
-export function useTasks(userId: string | null) {
+export function useTasks() {
   const tasks = ref<Task[]>([])
   const loading = ref(true)
   let unsubscribe: Unsubscribe | null = null
+  let currentUserId: string | null = null
 
-  function subscribeToTasks() {
-    if (!userId) {
-      loading.value = false
-      return
-    }
-
+  function subscribeToTasks(userId: string) {
+    if (unsubscribe) unsubscribe()
+    currentUserId = userId
     loading.value = true
+
     const tasksRef = collection(db, 'users', userId, 'tasks')
     const q = query(tasksRef, orderBy('order', 'asc'))
 
@@ -44,29 +40,23 @@ export function useTasks(userId: string | null) {
   }
 
   onUnmounted(() => {
-    if (unsubscribe) {
-      unsubscribe()
-    }
+    if (unsubscribe) unsubscribe()
   })
 
   async function addTask(text: string, priority: Task['priority'] = 'medium') {
-    if (!userId) return
-    const tasksRef = collection(db, 'users', userId, 'tasks')
+    if (!currentUserId) return
+    const tasksRef = collection(db, 'users', currentUserId, 'tasks')
     const now = Date.now()
     const order = tasks.value.length
     await addDoc(tasksRef, {
-      text,
-      completed: false,
-      priority,
-      order,
-      createdAt: now,
-      updatedAt: now,
+      text, completed: false, priority, order,
+      createdAt: now, updatedAt: now,
     })
   }
 
   async function updateTask(taskId: string, data: Partial<Omit<Task, 'id'>>) {
-    if (!userId) return
-    const taskRef = doc(db, 'users', userId, 'tasks', taskId)
+    if (!currentUserId) return
+    const taskRef = doc(db, 'users', currentUserId, 'tasks', taskId)
     await updateDoc(taskRef, { ...data, updatedAt: Date.now() })
   }
 
@@ -75,39 +65,30 @@ export function useTasks(userId: string | null) {
   }
 
   async function deleteTask(taskId: string) {
-    if (!userId) return
-    const taskRef = doc(db, 'users', userId, 'tasks', taskId)
+    if (!currentUserId) return
+    const taskRef = doc(db, 'users', currentUserId, 'tasks', taskId)
     await deleteDoc(taskRef)
   }
 
   async function clearCompleted() {
-    if (!userId) return
-    const completedTasks = tasks.value.filter(t => t.completed)
-    for (const task of completedTasks) {
+    if (!currentUserId) return
+    for (const task of tasks.value.filter(t => t.completed)) {
       await deleteTask(task.id)
     }
   }
 
   async function reorderTasks(reorderedTasks: Task[]) {
-    if (!userId) return
+    if (!currentUserId) return
     for (let i = 0; i < reorderedTasks.length; i++) {
-      const task = reorderedTasks[i]
-      if (task.order !== i) {
-        const taskRef = doc(db, 'users', userId, 'tasks', task.id)
-        await updateDoc(taskRef, { order: i, updatedAt: Date.now() })
+      const t = reorderedTasks[i]
+      if (t.order !== i) {
+        await updateDoc(doc(db, 'users', currentUserId, 'tasks', t.id), { order: i, updatedAt: Date.now() })
       }
     }
   }
 
   return {
-    tasks,
-    loading,
-    subscribeToTasks,
-    addTask,
-    updateTask,
-    toggleTask,
-    deleteTask,
-    clearCompleted,
-    reorderTasks,
+    tasks, loading, subscribeToTasks,
+    addTask, updateTask, toggleTask, deleteTask, clearCompleted, reorderTasks,
   }
 }

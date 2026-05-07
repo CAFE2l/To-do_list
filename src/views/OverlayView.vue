@@ -14,25 +14,25 @@ const {
   tasks,
   loading: tasksLoading,
   subscribeToTasks,
-} = useTasks(userId.value)
+} = useTasks()
 
 const {
   settings,
   loading: settingsLoading,
   subscribeToSettings,
-} = useOverlaySettings(userId.value)
+} = useOverlaySettings()
 
 onMounted(() => {
   if (userId.value) {
-    subscribeToTasks()
-    subscribeToSettings()
+    subscribeToTasks(userId.value)
+    subscribeToSettings(userId.value)
   }
 })
 
 watch(userId, (newId) => {
   if (newId) {
-    subscribeToTasks()
-    subscribeToSettings()
+    subscribeToTasks(newId)
+    subscribeToSettings(newId)
   }
 })
 

@@ -4,14 +4,14 @@ import { useAuth } from '@/composables/useAuth'
 import { useProfile } from '@/composables/useProfile'
 
 const { user } = useAuth()
-const { saving, error, success, saveProfile } = useProfile()
+const { saving, error, success, updateUserProfile } = useProfile()
 
 const name = ref(user.value?.displayName || '')
 const photoURL = ref(user.value?.photoURL || '')
 
 function handleSave() {
   if (!user.value) return
-  saveProfile(user.value.uid, {
+  updateUserProfile(user.value.uid, {
     displayName: name.value.trim(),
     photoURL: photoURL.value.trim(),
   })

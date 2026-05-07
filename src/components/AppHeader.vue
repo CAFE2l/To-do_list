@@ -1,20 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import UserDropdown from '@/components/layout/UserDropdown.vue'
 import { useAuth } from '@/composables/useAuth'
-import { useRouter } from 'vue-router'
 
-const { user, logout } = useAuth()
-const router = useRouter()
-
-async function handleLogout() {
-  await logout()
-  router.push('/')
-}
-
-const initials = computed(() => {
-  if (!user.value?.displayName) return '?'
-  return user.value.displayName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
-})
+const { user } = useAuth()
 </script>
 
 <template>
@@ -35,20 +23,8 @@ const initials = computed(() => {
           <template v-if="user">
             <router-link to="/dashboard" class="px-3 py-2 rounded-lg text-sm text-white/50 hover:text-white hover:bg-white/[0.04] transition-all duration-200">Dashboard</router-link>
             <router-link to="/settings" class="px-3 py-2 rounded-lg text-sm text-white/50 hover:text-white hover:bg-white/[0.04] transition-all duration-200">Settings</router-link>
-            <div class="flex items-center gap-2.5 ml-2 sm:ml-4 pl-2 sm:pl-4 border-l border-white/[0.06]">
-              <div class="hidden sm:block text-right">
-                <p class="text-sm text-white font-medium leading-tight">{{ user.displayName }}</p>
-                <p class="text-[11px] text-white/30 truncate max-w-[120px]">{{ user.email }}</p>
-              </div>
-              <div v-if="user.photoURL" class="relative">
-                <img :src="user.photoURL" class="w-8 h-8 rounded-full ring-2 ring-cyan-500/20 object-cover" />
-              </div>
-              <div v-else class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-semibold ring-2 ring-cyan-500/20">
-                {{ initials }}
-              </div>
-              <button @click="handleLogout" class="p-2 rounded-lg text-white/20 hover:text-red-400 hover:bg-white/[0.04] transition-all duration-200" title="Logout">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-              </button>
+            <div class="ml-2 sm:ml-4 pl-2 sm:pl-4 border-l border-white/[0.06]">
+              <UserDropdown />
             </div>
           </template>
           <template v-else>

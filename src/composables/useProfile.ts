@@ -1,16 +1,56 @@
 import { ref, onUnmounted } from 'vue'
-import { doc, getDoc, updateDoc, setDoc } from 'firebase/firestore'
+import { doc, onSnapshot, updateDoc, Unsubscribe } from 'firebase/firestore'
 import { auth, db } from '@/lib/firebase'
 import { updateProfile } from 'firebase/auth'
 import { useAuthStore } from '@/stores/authStore'
+import type { UserLocation } from '@/types'
+import { uploadAvatarToCloudinary } from '@/lib/cloudinary'
+
+export interface UserProfile {
+  uid: string
+  displayName: string
+  username: string
+  email: string
+  photoURL: string
+  bio: string
+  status: 'active' | 'focusing' | 'studying' | 'offline'
+  role: string
+  location: string | UserLocation
+  website: string
+  socialLinks: string[]
+  updatedAt: number
+}
 
 export function useProfile() {
-  const store = useAuthStore()
+  const profile = ref<UserProfile | null>(null)
+  const loading = ref(true)
   const saving = ref(false)
+  const uploading = ref(false)
   const error = ref('')
   const success = ref(false)
+  const store = useAuthStore()
 
-  async function saveProfile(uid: string, data: { displayName: string; photoURL: string }) {
+  let unsubscribe: Unsubscribe | null = null
+
+  function subscribeToProfile(uid: string) {
+    if (unsubscribe) unsubscribe()
+    loading.value = true
+
+    unsubscribe = onSnapshot(doc(db, 'users', uid), (snap) => {
+      if (snap.exists()) {
+        profile.value = snap.data() as UserProfile
+      }
+      loading.value = false
+    }, () => {
+      loading.value = false
+    })
+  }
+
+  onUnmounted(() => {
+    if (unsubscribe) unsubscribe()
+  })
+
+  async function updateUserProfile(uid: string, data: Partial<UserProfile>) {
     saving.value = true
     error.value = ''
     success.value = false
@@ -24,14 +64,13 @@ export function useProfile() {
       }
 
       await updateDoc(doc(db, 'users', uid), {
-        displayName: data.displayName,
-        photoURL: data.photoURL,
+        ...data,
         updatedAt: Date.now(),
       })
 
       if (store.user) {
-        store.user.displayName = data.displayName
-        store.user.photoURL = data.photoURL
+        if (data.displayName) store.user.displayName = data.displayName
+        if (data.photoURL !== undefined) store.user.photoURL = data.photoURL
       }
 
       success.value = true
@@ -43,5 +82,30 @@ export function useProfile() {
     }
   }
 
-  return { saving, error, success, saveProfile }
+  async function uploadAvatar(uid: string, file: File): Promise<string> {
+    uploading.value = true
+    error.value = ''
+
+    try {
+      const url = await uploadAvatarToCloudinary(file)
+
+      await updateUserProfile(uid, { photoURL: url })
+
+      if (auth.currentUser) {
+        await updateProfile(auth.currentUser, { photoURL: url })
+      }
+
+      return url
+    } catch (e: any) {
+      error.value = e.message || 'Upload failed.'
+      throw e
+    } finally {
+      uploading.value = false
+    }
+  }
+
+  return {
+    profile, loading, saving, uploading, error, success,
+    subscribeToProfile, updateUserProfile, uploadAvatar,
+  }
 }

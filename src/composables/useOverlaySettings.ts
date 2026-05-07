@@ -1,27 +1,20 @@
 import { ref, onUnmounted } from 'vue'
-import {
-  doc,
-  onSnapshot,
-  updateDoc,
-  Unsubscribe,
-  setDoc,
-} from 'firebase/firestore'
+import { doc, onSnapshot, updateDoc, setDoc, Unsubscribe } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import type { OverlaySettings } from '@/types'
 import { DEFAULT_OVERLAY_SETTINGS } from '@/types'
 
-export function useOverlaySettings(userId: string | null) {
+export function useOverlaySettings() {
   const settings = ref<OverlaySettings>({ ...DEFAULT_OVERLAY_SETTINGS })
   const loading = ref(true)
   let unsubscribe: Unsubscribe | null = null
+  let currentUserId: string | null = null
 
-  function subscribeToSettings() {
-    if (!userId) {
-      loading.value = false
-      return
-    }
-
+  function subscribeToSettings(userId: string) {
+    if (unsubscribe) unsubscribe()
+    currentUserId = userId
     loading.value = true
+
     const settingsRef = doc(db, 'users', userId, 'settings', 'overlay')
 
     unsubscribe = onSnapshot(settingsRef, (snapshot) => {
@@ -33,26 +26,20 @@ export function useOverlaySettings(userId: string | null) {
       loading.value = false
     }, (error) => {
       console.error('Error fetching settings:', error)
+      settings.value = { ...DEFAULT_OVERLAY_SETTINGS }
       loading.value = false
     })
   }
 
   onUnmounted(() => {
-    if (unsubscribe) {
-      unsubscribe()
-    }
+    if (unsubscribe) unsubscribe()
   })
 
   async function updateSettings(data: Partial<OverlaySettings>) {
-    if (!userId) return
-    const settingsRef = doc(db, 'users', userId, 'settings', 'overlay')
+    if (!currentUserId) return
+    const settingsRef = doc(db, 'users', currentUserId, 'settings', 'overlay')
     await updateDoc(settingsRef, { ...data, updatedAt: Date.now() })
   }
 
-  return {
-    settings,
-    loading,
-    subscribeToSettings,
-    updateSettings,
-  }
+  return { settings, loading, subscribeToSettings, updateSettings }
 }

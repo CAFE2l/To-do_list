@@ -15,12 +15,12 @@ const {
   loading: settingsLoading,
   subscribeToSettings,
   updateSettings,
-} = useOverlaySettings(userId.value)
+} = useOverlaySettings()
 
 onMounted(() => {
-  if (userId.value) subscribeToSettings()
+  if (userId.value) subscribeToSettings(userId.value)
 })
-watch(userId, (id) => { if (id) subscribeToSettings() })
+watch(userId, (id) => { if (id) subscribeToSettings(id) })
 
 const localTitle = ref(settings.value.title)
 const localEmptyText = ref(settings.value.emptyText)

@@ -20,6 +20,15 @@ export interface OverlaySettings {
   updatedAt: number
 }
 
+export interface UserLocation {
+  label: string
+  city: string
+  region: string
+  country: string
+  lat?: number
+  lng?: number
+}
+
 export interface AppUser {
   uid: string
   displayName: string
