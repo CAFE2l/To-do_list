@@ -187,7 +187,8 @@ The visual identity focuses on:
 ## Profile System
 
 <p align="center">
-   
+   <img width="1274" height="658" alt="image" src="https://github.com/user-attachments/assets/7d4b3e2e-fabf-481b-a844-1836592cb30c" />
+
 </p>
 
 ---
