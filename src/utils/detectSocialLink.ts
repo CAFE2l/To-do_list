@@ -98,6 +98,58 @@ export function normalizeSocialUrl(input: string): string {
   return url
 }
 
+const SOCIAL_TYPE_TO_LABEL: Record<string, string> = {
+  youtube: "YouTube",
+  github: "GitHub",
+  instagram: "Instagram",
+  tiktok: "TikTok",
+  twitter: "Twitter",
+  x: "X",
+  linkedin: "LinkedIn",
+  discord: "Discord",
+  telegram: "Telegram",
+  twitch: "Twitch",
+  whatsapp: "WhatsApp",
+  reddit: "Reddit",
+  pinterest: "Pinterest",
+  facebook: "Facebook",
+  spotify: "Spotify",
+  steam: "Steam",
+  behance: "Behance",
+  dribbble: "Dribbble",
+  figma: "Figma",
+  roblox: "Roblox",
+  email: "Email",
+  website: "Website",
+  portfolio: "Portfolio",
+  other: "Other",
+}
+
+export function getTitleFromSocialType(type: string, url?: string): string {
+  if (SOCIAL_TYPE_TO_LABEL[type]) {
+    return SOCIAL_TYPE_TO_LABEL[type]
+  }
+  if (url) {
+    try {
+      const normalized = url.toLowerCase().trim()
+      const withProto = normalized.startsWith("http") ? normalized : "https://" + normalized
+      const hostname = new URL(withProto).hostname.replace(/^www\./, "")
+      return hostname || "Website"
+    } catch {
+      return "Website"
+    }
+  }
+  return "Other"
+}
+
+export function normalizeUrl(input: string): string {
+  return normalizeSocialUrl(input)
+}
+
+export function detectSocialType(url: string): DetectionResult {
+  return detectSocialLinkType(url)
+}
+
 export function detectSocialLinkType(url: string): DetectionResult {
   if (!url) return { type: "other", label: "Other" }
 
@@ -187,11 +239,10 @@ export function sanitizeSocialLinkData(data: {
   if (!validation.valid) return null
 
   const allowedIcons = [
-    "youtube", "github", "instagram", "tiktok", "x", "twitter",
+    "youtube", "instagram", "tiktok", "twitter",
     "linkedin", "discord", "telegram", "twitch", "whatsapp",
-    "website", "email", "portfolio", "reddit", "pinterest",
-    "facebook", "spotify", "behance", "dribbble", "figma",
-    "steam", "roblox", "other",
+    "facebook", "reddit", "pinterest",
+    "spotify", "steam", "email", "website", "other",
   ]
   const icon = allowedIcons.includes(data.icon) ? data.icon : "other"
 

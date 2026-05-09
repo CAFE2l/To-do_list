@@ -3,7 +3,6 @@ import { ref, computed } from 'vue'
 import SocialIconImg from '@/components/common/SocialIconImg.vue'
 import {
   SOCIAL_ICON_OPTIONS,
-  getIconPath,
   MAX_SOCIAL_LINKS,
 } from '@/constants/socialIcons'
 import {
@@ -182,7 +181,7 @@ function submit() {
 
         <div
           v-if="showIconGrid"
-          class="grid grid-cols-8 gap-1.5 p-3 rounded-xl bg-white/[0.02] border border-white/[0.06]"
+          class="grid grid-cols-6 gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]"
         >
           <button
             v-for="opt in SOCIAL_ICON_OPTIONS"
@@ -195,7 +194,7 @@ function submit() {
               : 'border-white/5 hover:border-white/15 bg-white/[0.02] hover:bg-white/[0.04]'"
             :title="opt.label"
           >
-            <SocialIconImg :icon="opt.value" :size="20" />
+            <SocialIconImg :icon="opt.value" :size="36" />
           </button>
         </div>
       </div>

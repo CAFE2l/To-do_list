@@ -152,7 +152,7 @@ function openLink(url: string) {
             <input :value="editUrl" @input="onEditUrlInput(($event.target as HTMLInputElement).value)" placeholder="https://..." class="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-sm text-white placeholder-white/20 outline-none focus:border-cyan-500/30 transition-all duration-200" />
             <p v-if="editUrlError" class="text-[10px] text-red-400/70 mt-0.5">{{ editUrlError }}</p>
           </div>
-          <div class="grid grid-cols-8 gap-1">
+          <div class="grid grid-cols-6 gap-3">
             <button
               v-for="opt in SOCIAL_ICON_OPTIONS"
               :key="opt.value"
@@ -161,7 +161,7 @@ function openLink(url: string) {
               :class="editIcon === opt.value ? 'border-cyan-500/40 bg-cyan-500/10' : 'border-white/5 text-white/30 hover:text-white/50'"
               :title="opt.label"
             >
-              <SocialIconImg :icon="opt.value" :size="20" />
+              <SocialIconImg :icon="opt.value" :size="36" />
             </button>
           </div>
           <div class="flex gap-2">
