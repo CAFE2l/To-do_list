@@ -2,10 +2,10 @@
 
 <center><h1>Study Overlay</h1></center>
 
-> Realtime futuristic OBS productivity overlays for Study With Me creators.
+> Real-time, futuristic OBS productivity overlays for Study With Me creators.
 
 <p align="center">
-  <a src="https://to-do-list-three-eta-84.vercel.app">Study Overlay website</a>
+  <a href="https://to-do-list-three-eta-84.vercel.app">Study Overlay website</a>
   
 </p>
 
