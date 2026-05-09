@@ -1,4 +1,4 @@
-# <img src="./public/icons/study-overlay/icone.png" width="80" align="center" /> Study Overlay
+<img width="1280" height="592" alt="image" src="https://github.com/user-attachments/assets/2232bdf4-636c-4cf5-8146-ab08a434b8f6" /># <img src="./public/icons/study-overlay/icone.png" width="100" align="center" /> Study Overlay
 
 > Realtime futuristic OBS productivity overlays for Study With Me creators.
 
@@ -167,7 +167,8 @@ The visual identity focuses on:
 ## Dashboard
 
 <p align="center">
-  <img src="./docs/screenshots/dashboard.png" width="100%" />
+<img width="1280" height="592" alt="image" src="https://github.com/user-attachments/assets/ac459dc1-3fc3-437f-9a10-6dd7a22dbf15" />
+
 </p>
 
 ---
@@ -489,5 +490,5 @@ MIT License.
 > "Focus beautifully."
 
 <p align="center">
-  <img src="./public/icons/study-overlay/banner.png" width="90" />
+  <img src="./public/icons/study-overlay/banner.png" width="990" />
 </p>
