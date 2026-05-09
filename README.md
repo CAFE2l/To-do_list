@@ -5,7 +5,8 @@
 > Realtime futuristic OBS productivity overlays for Study With Me creators.
 
 <p align="center">
-  <img src="./docs/banner.png" alt="Study Overlay Banner" width="100%" />
+  <a src="https://to-do-list-three-eta-84.vercel.app">Study Overlay website</a>
+  
 </p>
 
 <p align="center">
