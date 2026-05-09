@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import type { UserProfile } from '@/composables/useProfile'
 import type { UserLocation, SocialLink } from '@/types'
-import { SOCIAL_ICON_MAP } from '@/constants/socialIcons'
+import SocialIconImg from '@/components/common/SocialIconImg.vue'
 
 const props = defineProps<{
   profile: UserProfile | null
@@ -84,13 +84,9 @@ const locationLabel = computed(() => {
           target="_blank"
           rel="noopener noreferrer"
           :title="link.title"
-          class="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center p-1.5 hover:border-cyan-500/30 hover:bg-cyan-500/5 transition-all duration-200"
+          class="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:border-cyan-500/30 hover:bg-cyan-500/5 transition-all duration-200"
         >
-          <img
-            :src="SOCIAL_ICON_MAP[link.icon] || SOCIAL_ICON_MAP.other"
-            :alt="link.title"
-            class="w-full h-full object-contain"
-          />
+          <SocialIconImg :icon="link.icon" :size="28" />
         </a>
       </template>
       <span v-if="socialLinks.length > 6" class="text-[10px] text-white/20">+{{ socialLinks.length - 6 }}</span>

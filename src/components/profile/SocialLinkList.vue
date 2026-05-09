@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { SocialLink, SocialLinkIcon } from '@/types'
-import { SOCIAL_ICON_MAP, SOCIAL_ICON_OPTIONS } from '@/constants/socialIcons'
+import SocialIconImg from '@/components/common/SocialIconImg.vue'
+import { SOCIAL_ICON_OPTIONS } from '@/constants/socialIcons'
 import {
   detectSocialLinkType,
   getSocialTitleFromUrl,
@@ -27,10 +28,6 @@ const editManuallySelected = ref(false)
 const deletingId = ref<string | null>(null)
 const editUrlError = ref('')
 const editTitleError = ref('')
-
-function getIconPath(icon: string): string {
-  return SOCIAL_ICON_MAP[icon] || SOCIAL_ICON_MAP.other
-}
 
 function startEdit(link: SocialLink) {
   editingId.value = link.id
@@ -164,7 +161,7 @@ function openLink(url: string) {
               :class="editIcon === opt.value ? 'border-cyan-500/40 bg-cyan-500/10' : 'border-white/5 text-white/30 hover:text-white/50'"
               :title="opt.label"
             >
-              <img :src="opt.path" :alt="opt.label" class="w-full h-full object-contain" />
+              <SocialIconImg :icon="opt.value" :size="20" />
             </button>
           </div>
           <div class="flex gap-2">
@@ -174,11 +171,7 @@ function openLink(url: string) {
         </div>
 
         <div v-else class="flex items-center gap-3 p-3">
-          <img
-            :src="getIconPath(link.icon)"
-            :alt="link.icon"
-            class="w-9 h-9 object-contain shrink-0"
-          />
+          <SocialIconImg :icon="link.icon" :size="36" />
 
           <div class="flex-1 min-w-0">
             <p class="text-sm font-medium text-white truncate">{{ link.title }}</p>

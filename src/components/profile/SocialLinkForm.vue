@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
+import SocialIconImg from '@/components/common/SocialIconImg.vue'
 import {
-  SOCIAL_ICON_MAP,
   SOCIAL_ICON_OPTIONS,
   getIconPath,
   MAX_SOCIAL_LINKS,
@@ -34,8 +34,7 @@ const isDetecting = ref(false)
 const isAtLimit = computed(() => props.linkCount >= MAX_SOCIAL_LINKS)
 
 const detectedPreview = computed(() => {
-  const iconPath = getIconPath(selectedIcon.value)
-  return iconPath
+  return selectedIcon.value
 })
 
 function detectFromUrl(value: string) {
@@ -166,10 +165,10 @@ function submit() {
       <div>
         <div class="flex items-center gap-2 mb-2">
           <span class="text-xs text-white/40">Icon</span>
-          <img
+          <SocialIconImg
             v-if="detectedPreview"
-            :src="detectedPreview"
-            class="w-6 h-6 object-contain rounded"
+            :icon="detectedPreview"
+            :size="24"
           />
           <button
             type="button"
@@ -196,7 +195,7 @@ function submit() {
               : 'border-white/5 hover:border-white/15 bg-white/[0.02] hover:bg-white/[0.04]'"
             :title="opt.label"
           >
-            <img :src="opt.path" :alt="opt.label" class="w-full h-full object-contain" />
+            <SocialIconImg :icon="opt.value" :size="20" />
           </button>
         </div>
       </div>
