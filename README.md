@@ -147,8 +147,7 @@ Everything updates instantly:
 
 Study Overlay was heavily inspired by:
 
-* Apple VisionOS
-* Microsoft Fluent Design
+
 * Frutiger Aero
 * Futuristic HUD interfaces
 * OBS streaming overlays
@@ -194,7 +193,7 @@ The visual identity focuses on:
 ---
 
 # 🧠 Tech Stack
-
+Apple VisionOS
 ## Frontend
 
 * Vue 3
@@ -219,7 +218,7 @@ The visual identity focuses on:
 * Realtime UI
 * LED animations
 * Motion effects
-* HUD inspired interfaces
+* HUD-inspired interfaces
 
 ---
 
@@ -414,29 +413,17 @@ The overlay was optimized for:
 
 ---
 
-# 📈 Future Features
 
-Planned updates:
 
-* ⏱️ Pomodoro timer
-* 🎵 Spotify integration
-* 📊 Session analytics
-* 🧩 Widget ecosystem
-* 🌐 Public study pages
-* 👥 Study rooms
-* 🤖 AI productivity assistant
-
----
 
 # 🧪 Inspiration
 
 Study Overlay was inspired by:
 
-* Apple VisionOS
-* Microsoft Fluent UI
+
+
 * Frutiger Aero
 * Linear
-* Notion
 * OBS overlays
 * Modern productivity software
 
@@ -450,7 +437,7 @@ Built by:
 
 * Full Stack Developer
 * UI/UX Designer
-* Study With Me creator
+* Study With Me, creator
 * Productivity enthusiast
 
 ---
@@ -465,8 +452,6 @@ It is about:
 * Atmosphere
 * Consistency
 * Immersion
-* Calm technology
-* Beautiful productivity
 
 The goal is to transform study sessions into immersive digital experiences.
 
