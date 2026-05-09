@@ -1,5 +1,5 @@
 import { ref, onUnmounted } from 'vue'
-import { doc, onSnapshot, updateDoc, setDoc, Unsubscribe } from 'firebase/firestore'
+import { doc, onSnapshot, updateDoc, Unsubscribe } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import type { OverlaySettings } from '@/types'
 import { DEFAULT_OVERLAY_SETTINGS } from '@/types'
@@ -21,7 +21,7 @@ export function useOverlaySettings() {
       if (snapshot.exists()) {
         settings.value = snapshot.data() as OverlaySettings
       } else {
-        setDoc(settingsRef, DEFAULT_OVERLAY_SETTINGS)
+        settings.value = { ...DEFAULT_OVERLAY_SETTINGS }
       }
       loading.value = false
     }, (error) => {

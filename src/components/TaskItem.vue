@@ -21,8 +21,8 @@ const emit = defineEmits<{
       @click="emit('toggle', task.id, !task.completed)"
       class="w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 transition-all duration-200"
       :class="task.completed
-        ? 'bg-gradient-to-br from-overlay-500 to-purple-500 border-overlay-500'
-        : 'border-white/20 hover:border-overlay-500/50 hover:shadow-lg hover:shadow-overlay-500/20'"
+        ? 'bg-gradient-to-br from-cyan-500 to-blue-600 border-cyan-500'
+        : 'border-white/20 hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/20'"
     >
       <svg v-if="task.completed" class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>

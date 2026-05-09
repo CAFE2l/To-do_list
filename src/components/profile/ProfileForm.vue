@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import type { UserProfile } from '@/composables/useProfile'
-import type { UserLocation } from '@/types'
+import type { UserLocation, SocialLinkIcon, SocialLink } from '@/types'
 import { detectBrowserLocation, getLocationFromCoordinates } from '@/lib/geolocation'
 import StatusSelector from './StatusSelector.vue'
 import AvatarUploader from './AvatarUploader.vue'
+import SocialLinkForm from './SocialLinkForm.vue'
+import SocialLinkList from './SocialLinkList.vue'
 
 const props = defineProps<{
   profile: UserProfile | null
@@ -12,6 +14,7 @@ const props = defineProps<{
   uploading: boolean
   error: string
   success: boolean
+  socialLinks: SocialLink[]
 }>()
 
 type ProfileStatus = UserProfile['status']
@@ -20,17 +23,18 @@ const emit = defineEmits<{
   save: [data: Partial<UserProfile>]
   uploadAvatar: [file: File]
   removeAvatar: []
+  addSocialLink: [data: { title: string; url: string; icon: SocialLinkIcon }]
+  editSocialLink: [id: string, data: { title: string; url: string; icon: SocialLinkIcon }]
+  deleteSocialLink: [id: string]
 }>()
 
 const local = ref<Partial<UserProfile>>({})
-const socialText = ref('')
 const detecting = ref(false)
 const geoError = ref('')
 
 watch(() => props.profile, (p) => {
   if (p) {
     local.value = { ...p }
-    socialText.value = Array.isArray(p.socialLinks) ? p.socialLinks.join('\n') : ''
   }
 }, { immediate: true })
 
@@ -47,7 +51,6 @@ const locationLabel = computed(() => {
 function handleSave() {
   emit('save', {
     ...local.value,
-    socialLinks: socialText.value.split('\n').filter(s => s.trim()),
     location: locationLabel.value,
   })
 }
@@ -96,7 +99,7 @@ const roles = ['Student', 'Developer', 'Creator', 'Designer', 'Streamer', 'Teach
 
     <div>
       <label class="block text-xs text-white/40 uppercase tracking-wider mb-1.5">Display name</label>
-      <input v-model="local.displayName" maxlength="30" class="w-full bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/20 outline-none focus:border-cyan-500/30 transition-all duration-200" />
+      <input v-model="local.displayName" maxlength="30" class="glass-input w-full" />
     </div>
 
     <div>
@@ -142,9 +145,15 @@ const roles = ['Student', 'Developer', 'Creator', 'Designer', 'Streamer', 'Teach
       <input v-model="local.website" class="w-full bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/20 outline-none focus:border-cyan-500/30 transition-all duration-200" placeholder="https://yourlink.com" />
     </div>
 
-    <div>
-      <label class="block text-xs text-white/40 uppercase tracking-wider mb-1.5">Social links <span class="text-white/20 font-normal">(one per line)</span></label>
-      <textarea v-model="socialText" rows="2" class="w-full bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/20 outline-none focus:border-cyan-500/30 transition-all duration-200 resize-none" placeholder="https://twitter.com/yourhandle"></textarea>
+    <div class="pt-2 border-t border-white/[0.04]">
+      <div class="grid md:grid-cols-2 gap-4">
+        <SocialLinkForm @add="(data) => emit('addSocialLink', data)" />
+        <SocialLinkList
+          :links="socialLinks"
+          @edit="(id, data) => emit('editSocialLink', id, data)"
+          @delete="(id) => emit('deleteSocialLink', id)"
+        />
+      </div>
     </div>
 
     <div v-if="error" class="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-sm text-red-400">{{ error }}</div>

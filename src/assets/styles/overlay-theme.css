@@ -1,0 +1,401 @@
+/* ===== STUDY OVERLAY DESIGN SYSTEM ===== */
+/* Palette: cyan, electric blue, deep blue, dark backgrounds */
+/* ─── LED BORDER ANIMATION ─── */
+@keyframes ledBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes ledPulse {
+  0%, 100% { opacity: 1; filter: blur(2px) brightness(1.5); }
+  50% { opacity: 0.7; filter: blur(4px) brightness(1); }
+}
+
+@keyframes ledGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(34, 211, 238, 0.3), 0 0 10px rgba(34, 211, 238, 0.2),
+      0 0 20px rgba(37, 99, 235, 0.15), 0 0 40px rgba(37, 99, 235, 0.08),
+      inset 0 0 5px rgba(34, 211, 238, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.4), 0 0 20px rgba(6, 182, 212, 0.3),
+      0 0 40px rgba(37, 99, 235, 0.2), 0 0 80px rgba(37, 99, 235, 0.12),
+      inset 0 0 10px rgba(6, 182, 212, 0.08);
+  }
+}
+
+@keyframes ledCorner1 {
+  0% { box-shadow: 0 0 15px 3px rgba(34, 211, 238, 0.8); }
+  33% { box-shadow: 0 0 15px 3px rgba(6, 182, 212, 0.8); }
+  66% { box-shadow: 0 0 15px 3px rgba(37, 99, 235, 0.8); }
+  100% { box-shadow: 0 0 15px 3px rgba(34, 211, 238, 0.8); }
+}
+
+@keyframes ledCorner2 {
+  0% { box-shadow: 0 0 15px 3px rgba(37, 99, 235, 0.8); }
+  33% { box-shadow: 0 0 15px 3px rgba(34, 211, 238, 0.8); }
+  66% { box-shadow: 0 0 15px 3px rgba(6, 182, 212, 0.8); }
+  100% { box-shadow: 0 0 15px 3px rgba(37, 99, 235, 0.8); }
+}
+
+@keyframes ledCorner3 {
+  0% { box-shadow: 0 0 15px 3px rgba(6, 182, 212, 0.8); }
+  33% { box-shadow: 0 0 15px 3px rgba(37, 99, 235, 0.8); }
+  66% { box-shadow: 0 0 15px 3px rgba(34, 211, 238, 0.8); }
+  100% { box-shadow: 0 0 15px 3px rgba(6, 182, 212, 0.8); }
+}
+
+@keyframes ledCorner4 {
+  0% { box-shadow: 0 0 15px 3px rgba(59, 130, 246, 0.8); }
+  33% { box-shadow: 0 0 15px 3px rgba(34, 211, 238, 0.8); }
+  66% { box-shadow: 0 0 15px 3px rgba(6, 182, 212, 0.8); }
+  100% { box-shadow: 0 0 15px 3px rgba(59, 130, 246, 0.8); }
+}
+
+/* ─── LED DOTS ─── */
+@keyframes ledDotBlink {
+  0%, 90%, 100% { opacity: 1; transform: scale(1); }
+  95% { opacity: 0.3; transform: scale(0.6); }
+}
+
+@keyframes ledDotBlink2 {
+  0%, 85%, 100% { opacity: 1; transform: scale(1); }
+  92% { opacity: 0.2; transform: scale(0.5); }
+}
+
+@keyframes ledDotBlink3 {
+  0%, 88%, 100% { opacity: 1; transform: scale(1); }
+  94% { opacity: 0.3; transform: scale(0.7); }
+}
+
+/* ─── SCANLINE ─── */
+@keyframes scanlineMove {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes fadeOutRight {
+  to { opacity: 0; transform: translateX(60px) scale(0.9); max-height: 0; margin: 0; padding: 0; overflow: hidden; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes progressGlow {
+  0%, 100% { box-shadow: 0 0 5px rgba(34, 211, 238, 0.5); }
+  50% { box-shadow: 0 0 15px rgba(6, 182, 212, 0.8); }
+}
+
+@keyframes particleFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.04; }
+  25% { transform: translate(8px, -16px) scale(1.1); opacity: 0.08; }
+  50% { transform: translate(-4px, -32px) scale(0.8); opacity: 0.03; }
+  75% { transform: translate(12px, -12px) scale(1.05); opacity: 0.06; }
+}
+
+@keyframes particleFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.03; }
+  30% { transform: translate(-12px, -20px) scale(0.9); opacity: 0.07; }
+  60% { transform: translate(8px, -28px) scale(1.15); opacity: 0.05; }
+}
+
+@keyframes particleFloat3 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.04; }
+  40% { transform: translate(16px, -24px) scale(1.05); opacity: 0.08; }
+  80% { transform: translate(-8px, -12px) scale(0.7); opacity: 0.03; }
+}
+
+/* ─── GLASS CARD ─── */
+.glass-card {
+  background: linear-gradient(135deg, rgba(5, 8, 22, 0.96) 0%, rgba(10, 18, 35, 0.92) 50%, rgba(5, 8, 22, 0.96) 100%);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(34, 211, 238, 0.15);
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.20), 0 0 30px rgba(59, 130, 246, 0.16), 0 0 60px rgba(6, 182, 212, 0.08), inset 0 0 30px rgba(34, 211, 238, 0.02);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(34, 211, 238, 0.3);
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.28), 0 0 50px rgba(59, 130, 246, 0.20), 0 0 80px rgba(6, 182, 212, 0.12);
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.03), transparent);
+  animation: shimmer 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ─── LED BORDER WRAPPER ─── */
+.led-border {
+  position: relative;
+}
+
+.led-border::after {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(90deg, #22D3EE, #3B82F6, #06B6D4, #2563EB, #22D3EE);
+  background-size: 300% 100%;
+  animation: ledBorder 6s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ─── LED CORNER DOTS ─── */
+.led-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.led-dot-tl { top: -3px; left: -3px; background: #22D3EE; animation: ledCorner1 3s ease-in-out infinite; }
+.led-dot-tr { top: -3px; right: -3px; background: #3B82F6; animation: ledCorner2 3s ease-in-out infinite; }
+.led-dot-bl { bottom: -3px; left: -3px; background: #06B6D4; animation: ledCorner3 3s ease-in-out infinite; }
+.led-dot-br { bottom: -3px; right: -3px; background: #2563EB; animation: ledCorner4 3s ease-in-out infinite; }
+
+/* ─── SIDE LED DOTS ─── */
+.led-side-dots {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.led-side-dots.left { left: -3px; }
+.led-side-dots.right { right: -3px; }
+.led-side-dot {
+  width: 4px; height: 4px; border-radius: 50%; background: #22D3EE;
+}
+.led-side-dot:nth-child(1) { animation: ledDotBlink 2s ease-in-out infinite; }
+.led-side-dot:nth-child(2) { animation: ledDotBlink2 2.5s ease-in-out infinite; }
+.led-side-dot:nth-child(3) { animation: ledDotBlink3 3s ease-in-out infinite; }
+.led-side-dot:nth-child(4) { animation: ledDotBlink 1.8s ease-in-out infinite; }
+.led-side-dot:nth-child(5) { animation: ledDotBlink2 2.2s ease-in-out infinite; }
+
+/* ─── SCANLINE EFFECT ─── */
+.scanline {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.08), transparent);
+  animation: scanlineMove 8s linear infinite;
+  pointer-events: none;
+}
+
+/* ─── TASK ITEM ─── */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  animation: fadeInUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.task-item:hover {
+  background: rgba(34, 211, 238, 0.05);
+  border-color: rgba(34, 211, 238, 0.15);
+}
+
+.task-item.removing {
+  animation: fadeOutRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  opacity: 0.4;
+}
+
+.task-item.completed {
+  border-left-color: rgba(34, 197, 94, 0.5);
+}
+
+/* ─── PRIORITY BORDERS ─── */
+.priority-high { border-left: 3px solid rgba(239, 68, 68, 0.6); }
+.priority-medium { border-left: 3px solid rgba(234, 179, 8, 0.6); }
+.priority-low { border-left: 3px solid rgba(34, 197, 94, 0.6); }
+
+/* ─── CUSTOM CHECKBOX ─── */
+.custom-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border: 1.5px solid rgba(34, 211, 238, 0.3);
+  border-radius: 5px;
+  background: rgba(5, 8, 22, 0.5);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.custom-checkbox:hover {
+  border-color: rgba(34, 211, 238, 0.6);
+  box-shadow: 0 0 8px rgba(34, 211, 238, 0.2);
+}
+
+.custom-checkbox:checked {
+  background: linear-gradient(135deg, #22D3EE, #3B82F6);
+  border-color: #22D3EE;
+}
+
+.custom-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ─── PROGRESS BAR ─── */
+.progress-bar {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #22D3EE, #06B6D4, #3B82F6);
+  background-size: 200% 100%;
+  animation: ledBorder 4s linear infinite;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── INPUT STYLE ─── */
+.glass-input {
+  background: rgba(5, 8, 22, 0.7);
+  border: 1px solid rgba(34, 211, 238, 0.12);
+  border-radius: 12px;
+  padding: 10px 14px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  outline: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-input:focus {
+  border-color: rgba(34, 211, 238, 0.35);
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.10), inset 0 0 10px rgba(34, 211, 238, 0.02);
+}
+
+.glass-input::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* ─── ADD BUTTON ─── */
+.add-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #06B6D4, #2563EB);
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  letter-spacing: 0.01em;
+}
+
+.add-btn:hover {
+  background: linear-gradient(135deg, #22D3EE, #3B82F6);
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.25);
+  transform: scale(1.03);
+}
+
+.add-btn:active { transform: scale(0.96); }
+
+/* ─── DELETE BUTTON ─── */
+.delete-btn {
+  opacity: 0;
+  transform: scale(0.7);
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*:hover > .delete-btn, .group:hover .delete-btn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.delete-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.5);
+  color: rgba(239, 68, 68, 0.8);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+}
+
+/* ─── HEADER GLOW ─── */
+.header-glow::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.5), rgba(59, 130, 246, 0.5), transparent);
+}
+
+/* ─── SCROLLBAR ─── */
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); border-radius: 2px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(34, 211, 238, 0.3); border-radius: 2px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(34, 211, 238, 0.5); }
+
+/* ─── PARTICLE ─── */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle at center, rgba(34, 211, 238, 0.15), transparent);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 400px) {
+  .task-text { font-size: 13px; }
+}

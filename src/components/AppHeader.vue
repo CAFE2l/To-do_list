@@ -6,15 +6,13 @@ const { user } = useAuth()
 </script>
 
 <template>
-  <header class="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.04] backdrop-blur-2xl bg-[#0a0a1a]/70">
+  <header class="header-glow fixed top-0 left-0 right-0 z-50 border-b border-white/[0.04] backdrop-blur-2xl bg-[#0a0a1a]/70">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <router-link to="/" class="flex items-center gap-2.5 group shrink-0">
           <div class="relative">
             <div class="absolute inset-0 bg-cyan-400/10 blur-lg rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div class="relative w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white text-sm shadow-lg shadow-cyan-500/20">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-            </div>
+            <img src="/icons/study-overlay/icone.png" alt="Study Overlay" class="relative w-14 h-14 object-contain" />
           </div>
           <span class="font-bold text-white text-base tracking-tight hidden sm:block">Study Overlay</span>
         </router-link>

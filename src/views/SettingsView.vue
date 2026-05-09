@@ -5,7 +5,6 @@ import { useOverlaySettings } from '@/composables/useOverlaySettings'
 import ToggleSwitch from '@/components/ui/ToggleSwitch.vue'
 import OverlayPreview from '@/components/overlay/OverlayPreview.vue'
 import ProfileEditor from '@/components/profile/ProfileEditor.vue'
-import type { Theme } from '@/types'
 
 const { user } = useAuth()
 const userId = computed(() => user.value?.uid || null)
@@ -45,15 +44,6 @@ function commitOpacity() {
   localOpacity.value = v
   updateSettings({ opacity: Math.round(v) / 100 })
 }
-
-function selectTheme(t: Theme) { updateSettings({ theme: t }) }
-
-const themes: { key: Theme; label: string; gradient: string; dot: string }[] = [
-  { key: 'aqua', label: 'Aqua', gradient: 'from-cyan-400 to-blue-500', dot: 'bg-cyan-400' },
-  { key: 'purple', label: 'Purple', gradient: 'from-purple-400 to-pink-500', dot: 'bg-purple-400' },
-  { key: 'green', label: 'Green', gradient: 'from-emerald-400 to-teal-500', dot: 'bg-emerald-400' },
-  { key: 'minimal-dark', label: 'Minimal Dark', gradient: 'from-white/20 to-white/5', dot: 'bg-white/30' },
-]
 </script>
 
 <template>
@@ -74,45 +64,29 @@ const themes: { key: Theme; label: string; gradient: string; dot: string }[] = [
       <div v-else class="grid lg:grid-cols-12 gap-6">
 
         <div class="lg:col-span-7 space-y-6">
-          <div class="rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] p-5 sm:p-6 shadow-xl">
+          <div class="glass-card p-5 sm:p-6 rounded-2xl">
             <h2 class="text-base font-semibold text-white mb-4 flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>General</h2>
             <div class="space-y-4">
               <div>
                 <label class="block text-xs text-white/40 uppercase tracking-wider mb-1.5">Overlay title</label>
-                <input v-model="localTitle" @change="commitTitle" maxlength="30" class="w-full bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/20 outline-none focus:border-cyan-500/30 transition-all duration-200" />
+                <input v-model="localTitle" @change="commitTitle" maxlength="30" class="glass-input w-full" />
               </div>
               <div>
                 <label class="block text-xs text-white/40 uppercase tracking-wider mb-1.5">Empty state message</label>
-                <input v-model="localEmptyText" @change="commitEmpty" maxlength="40" class="w-full bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/20 outline-none focus:border-cyan-500/30 transition-all duration-200" />
+                <input v-model="localEmptyText" @change="commitEmpty" maxlength="40" class="glass-input w-full" />
               </div>
             </div>
           </div>
 
-          <div class="rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] p-5 sm:p-6 shadow-xl">
+          <div class="glass-card p-5 sm:p-6 rounded-2xl">
             <h2 class="text-base font-semibold text-white mb-4 flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>Appearance</h2>
             <div class="space-y-5">
               <div>
-                <label class="block text-xs text-white/40 uppercase tracking-wider mb-3">Theme</label>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                  <button
-                    v-for="t in themes" :key="t.key"
-                    @click="selectTheme(t.key)"
-                    class="relative rounded-xl p-3 border transition-all duration-200 text-center group"
-                    :class="settings.theme === t.key ? 'border-cyan-500/40 bg-cyan-500/10 ring-1 ring-cyan-500/20' : 'border-white/5 bg-white/[0.02] hover:border-white/10 hover:bg-white/[0.04]'"
-                  >
-                    <div class="w-full h-8 rounded-lg bg-gradient-to-br mb-2" :class="t.gradient"></div>
-                    <div class="flex items-center justify-center gap-1.5">
-                      <div class="w-1.5 h-1.5 rounded-full" :class="t.dot"></div>
-                      <span class="text-xs text-white/50 group-hover:text-white/70 transition-colors">{{ t.label }}</span>
-                    </div>
-                    <div v-if="settings.theme === t.key" class="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-cyan-500 flex items-center justify-center shadow-lg">
-                      <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-                    </div>
-                  </button>
+                <div class="p-4 rounded-xl bg-cyan-500/5 border border-cyan-500/10 mb-4">
+                  <p class="text-sm text-cyan-400/80 font-medium mb-1">Official Overlay Style</p>
+                  <p class="text-xs text-white/40">This overlay uses the official Study Overlay design system — inspired by futuristic glass HUD interfaces. LED border, neon glow, and glassmorphism are applied automatically.</p>
                 </div>
-              </div>
 
-              <div>
                 <label class="block text-xs text-white/40 uppercase tracking-wider mb-3">Width: <span class="text-white/70">{{ localWidth }}px</span></label>
                 <input type="range" min="280" max="600" step="10" v-model.number="localWidth" @change="commitWidth" class="w-full accent-cyan-500 h-1.5 rounded-full appearance-none bg-white/10 cursor-pointer" />
                 <div class="flex justify-between text-[10px] text-white/20 mt-1"><span>280px</span><span>600px</span></div>
@@ -126,7 +100,7 @@ const themes: { key: Theme; label: string; gradient: string; dot: string }[] = [
             </div>
           </div>
 
-          <div class="rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] p-5 sm:p-6 shadow-xl">
+          <div class="glass-card p-5 sm:p-6 rounded-2xl">
             <h2 class="text-base font-semibold text-white mb-4 flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>Visibility</h2>
             <div class="space-y-4">
               <ToggleSwitch v-model="settings.showLiveBadge" @update:model-value="updateSettings({ showLiveBadge: $event })" label="Show LIVE badge" />
@@ -138,12 +112,12 @@ const themes: { key: Theme; label: string; gradient: string; dot: string }[] = [
 
         <div class="lg:col-span-5 space-y-6">
           <div class="lg:sticky lg:top-24 space-y-6">
-            <div class="rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] p-5 sm:p-6 shadow-xl">
+            <div class="glass-card p-5 sm:p-6 rounded-2xl">
               <h2 class="text-base font-semibold text-white mb-4 flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>Live Preview</h2>
               <OverlayPreview :settings="settings" />
             </div>
 
-            <div class="rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] p-5 sm:p-6 shadow-xl">
+            <div class="glass-card p-5 sm:p-6 rounded-2xl">
               <h2 class="text-base font-semibold text-white mb-4 flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>Profile</h2>
               <ProfileEditor />
             </div>

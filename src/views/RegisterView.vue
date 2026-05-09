@@ -75,13 +75,9 @@ async function handleGoogle() {
     <AuthBackground />
 
     <div class="relative w-full max-w-[420px]">
-      <div class="relative">
-        <div class="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-cyan-400/20 via-blue-500/10 to-transparent blur-sm"></div>
-        <div class="absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-cyan-400/5 via-blue-500/5 to-emerald-400/5 opacity-50"></div>
+      <div class="glass-card rounded-2xl p-8 sm:p-10">
 
-        <div class="relative rounded-2xl bg-[#0d1b2a]/70 backdrop-blur-2xl border border-white/[0.06] p-8 sm:p-10 shadow-2xl shadow-cyan-500/5">
-
-          <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent"></div>
+          <div class="scanline"></div>
 
           <div class="text-center mb-7">
             <router-link to="/" class="inline-flex items-center gap-2.5 mb-5 group">
@@ -106,7 +102,7 @@ async function handleGoogle() {
                   type="text"
                   placeholder="Your name"
                   autocomplete="name"
-                  class="relative w-full bg-[#0a1520]/80 border border-white/[0.08] rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 outline-none transition-all duration-300 focus:border-cyan-400/30 focus:bg-[#0a1520]"
+                  class="glass-input w-full"
                 />
               </div>
             </div>
@@ -120,7 +116,7 @@ async function handleGoogle() {
                   type="email"
                   placeholder="you@example.com"
                   autocomplete="email"
-                  class="relative w-full bg-[#0a1520]/80 border border-white/[0.08] rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 outline-none transition-all duration-300 focus:border-cyan-400/30 focus:bg-[#0a1520]"
+                  class="glass-input w-full"
                 />
               </div>
             </div>
@@ -136,7 +132,7 @@ async function handleGoogle() {
                     placeholder="••••••"
                     autocomplete="new-password"
                     maxlength="64"
-                    class="relative w-full bg-[#0a1520]/80 border border-white/[0.08] rounded-xl px-3 py-3 text-white text-sm placeholder-white/20 outline-none transition-all duration-300 focus:border-cyan-400/30 focus:bg-[#0a1520] pr-9"
+                    class="glass-input w-full pr-9"
                   />
                   <button type="button" @click="showPassword = !showPassword" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/20 hover:text-white/50 transition-colors">
                     <svg v-if="!showPassword" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
@@ -155,7 +151,7 @@ async function handleGoogle() {
                     placeholder="••••••"
                     autocomplete="new-password"
                     maxlength="64"
-                    class="relative w-full bg-[#0a1520]/80 border border-white/[0.08] rounded-xl px-3 py-3 text-white text-sm placeholder-white/20 outline-none transition-all duration-300 focus:border-cyan-400/30 focus:bg-[#0a1520] pr-9"
+                    class="glass-input w-full pr-9"
                   />
                   <button type="button" @click="showConfirmPassword = !showConfirmPassword" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/20 hover:text-white/50 transition-colors">
                     <svg v-if="!showConfirmPassword" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
@@ -213,7 +209,6 @@ async function handleGoogle() {
             Already have an account?
             <router-link to="/login" class="text-cyan-400/80 hover:text-cyan-300 font-medium transition-colors">Sign in</router-link>
           </p>
-        </div>
       </div>
     </div>
   </div>

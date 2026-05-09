@@ -79,7 +79,7 @@ const initials = (name: string) =>
 
       <div class="grid lg:grid-cols-12 gap-6">
         <div class="lg:col-span-7 space-y-6">
-          <div class="rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] p-5 sm:p-6 shadow-xl transition-all duration-300 hover:shadow-cyan-500/5">
+          <div class="glass-card rounded-2xl p-5 sm:p-6">
             <h2 class="text-base font-semibold text-white mb-4 flex items-center gap-2">
               <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
               Add new task
@@ -87,7 +87,7 @@ const initials = (name: string) =>
             <TaskForm @add="handleAdd" />
           </div>
 
-          <div class="rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] p-5 sm:p-6 shadow-xl transition-all duration-300 hover:shadow-cyan-500/5">
+          <div class="glass-card rounded-2xl p-5 sm:p-6">
             <div class="flex items-center justify-between mb-4">
               <h2 class="text-base font-semibold text-white flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
@@ -108,7 +108,7 @@ const initials = (name: string) =>
               <div class="w-5 h-5 border-2 border-cyan-500/30 border-t-cyan-500 rounded-full animate-spin"></div>
             </div>
 
-            <div v-else-if="tasks.length === 0" class="flex flex-col items-center justify-center py-12 text-center">
+            <div v-else-if="tasks.length === 0" class="flex flex-col items-center justify-center py-12 text-center empty-state">
               <div class="w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center mb-3">
                 <span class="text-2xl opacity-30">📋</span>
               </div>
@@ -130,7 +130,7 @@ const initials = (name: string) =>
         </div>
 
         <div class="lg:col-span-5 space-y-6">
-          <div class="rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] p-5 sm:p-6 shadow-xl transition-all duration-300 hover:shadow-cyan-500/5">
+          <div class="glass-card rounded-2xl p-5 sm:p-6">
             <h2 class="text-base font-semibold text-white mb-4 flex items-center gap-2">
               <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
               Progress
@@ -139,17 +139,16 @@ const initials = (name: string) =>
               <span class="text-4xl font-bold text-white">{{ completedCount }}</span>
               <span class="text-sm text-white/40 mb-1">/ {{ tasks.length }} tasks</span>
             </div>
-            <div class="h-2 rounded-full bg-white/5 overflow-hidden mb-2">
+            <div class="progress-bar mb-2">
               <div
-                class="h-full rounded-full transition-all duration-500 ease-out"
-                :class="tasks.length > 0 && completedCount === tasks.length ? 'bg-gradient-to-r from-emerald-400 to-green-500' : 'bg-gradient-to-r from-cyan-500 to-blue-500'"
+                class="progress-fill"
                 :style="{ width: progress + '%' }"
               ></div>
             </div>
             <p class="text-xs text-white/30 text-right">{{ progress }}% complete</p>
           </div>
 
-          <div class="rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] p-5 sm:p-6 shadow-xl transition-all duration-300 hover:shadow-cyan-500/5">
+          <div class="glass-card rounded-2xl p-5 sm:p-6">
             <h2 class="text-base font-semibold text-white mb-4 flex items-center gap-2">
               <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
               Overlay link
@@ -162,14 +161,14 @@ const initials = (name: string) =>
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
                 {{ copyFeedback ? 'Copied!' : 'Copy link' }}
               </button>
-              <button @click="openOverlay" class="flex-1 py-2.5 rounded-xl text-xs font-medium bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-1.5">
+              <button @click="openOverlay" class="flex-1 py-2.5 rounded-xl text-xs font-medium add-btn gap-1.5">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                 Open overlay
               </button>
             </div>
           </div>
 
-          <div class="rounded-2xl bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] p-5 sm:p-6 shadow-xl transition-all duration-300 hover:shadow-cyan-500/5">
+          <div class="glass-card rounded-2xl p-5 sm:p-6">
             <h2 class="text-base font-semibold text-white mb-3 flex items-center gap-2">
               <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
               OBS Setup

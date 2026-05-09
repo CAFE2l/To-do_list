@@ -10,7 +10,7 @@ const emit = defineEmits<{
 const statuses = [
   { value: 'active', label: 'Active', color: 'bg-emerald-400' },
   { value: 'focusing', label: 'Focusing', color: 'bg-cyan-400' },
-  { value: 'studying', label: 'Studying', color: 'bg-purple-400' },
+  { value: 'studying', label: 'Studying', color: 'bg-blue-400' },
   { value: 'offline', label: 'Offline', color: 'bg-white/20' },
 ]
 </script>

@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { UserProfile } from '@/composables/useProfile'
-import type { UserLocation } from '@/types'
+import type { UserLocation, SocialLink } from '@/types'
+import { SOCIAL_LINK_ICONS } from '@/types'
 
 const props = defineProps<{
   profile: UserProfile | null
+  socialLinks?: SocialLink[]
 }>()
 
 const initials = computed(() => {
@@ -15,7 +17,7 @@ const initials = computed(() => {
 const statusColors: Record<string, string> = {
   active: 'bg-emerald-400',
   focusing: 'bg-cyan-400',
-  studying: 'bg-purple-400',
+  studying: 'bg-blue-400',
   offline: 'bg-white/20',
 }
 
@@ -75,10 +77,18 @@ const locationLabel = computed(() => {
       <a :href="profile.website" target="_blank" class="text-xs text-cyan-400/60 hover:text-cyan-300 transition-colors">{{ profile.website }}</a>
     </div>
 
-    <div v-if="profile?.socialLinks?.length" class="flex items-center justify-center gap-3 mt-4">
-      <a v-for="(link, i) in profile.socialLinks" :key="i" :href="link" target="_blank" class="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/30 hover:text-cyan-400 hover:border-cyan-500/30 transition-all duration-200">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
-      </a>
+    <div v-if="socialLinks?.length" class="flex items-center justify-center gap-3 mt-4 flex-wrap">
+      <template v-for="link in socialLinks.slice(0, 6)" :key="link.id">
+        <a
+          :href="link.url"
+          target="_blank"
+          :title="link.title"
+          class="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/30 hover:text-cyan-400 hover:border-cyan-500/30 transition-all duration-200"
+          v-html="SOCIAL_LINK_ICONS[link.icon]?.svg || SOCIAL_LINK_ICONS.other.svg"
+        ></a>
+      </template>
+      <span v-if="socialLinks.length > 6" class="text-[10px] text-white/20">+{{ socialLinks.length - 6 }}</span>
     </div>
+    <p v-else class="text-[11px] text-white/20 mt-4">No social links yet</p>
   </div>
 </template>
