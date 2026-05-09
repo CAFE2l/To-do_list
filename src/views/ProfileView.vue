@@ -65,14 +65,14 @@ async function handleRemoveAvatar() {
   }
 }
 
-function handleAddSocialLink(data: { title: string; url: string; icon: SocialLinkIcon }) {
+function handleAddSocialLink(data: { title: string; url: string; icon: string; iconManuallySelected: boolean }) {
   if (!uid.value) return
   addLink(data)
 }
 
-function handleEditSocialLink(id: string, data: { title: string; url: string; icon: SocialLinkIcon }) {
+function handleEditSocialLink(id: string, data: { title: string; url: string; icon: string; iconManuallySelected?: boolean }) {
   if (!uid.value) return
-  updateLink(id, data)
+  updateLink(id, { ...data, icon: data.icon as SocialLinkIcon })
 }
 
 function handleDeleteSocialLink(id: string) {

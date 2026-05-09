@@ -246,36 +246,45 @@
 
 /* ─── CUSTOM CHECKBOX ─── */
 .custom-checkbox {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 18px; height: 18px;
+  width: 22px; height: 22px;
   border: 1.5px solid rgba(34, 211, 238, 0.3);
-  border-radius: 5px;
-  background: rgba(5, 8, 22, 0.5);
+  border-radius: 7px;
+  background: rgba(5, 8, 22, 0.75);
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .custom-checkbox:hover {
   border-color: rgba(34, 211, 238, 0.6);
-  box-shadow: 0 0 8px rgba(34, 211, 238, 0.2);
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.2);
 }
 
-.custom-checkbox:checked {
-  background: linear-gradient(135deg, #22D3EE, #3B82F6);
-  border-color: #22D3EE;
+.custom-checkbox.checked {
+  background: linear-gradient(135deg, #22D3EE, #2563EB);
+  border-color: rgba(34, 211, 238, 0.9);
+  box-shadow:
+    0 0 12px rgba(34, 211, 238, 0.35),
+    0 0 24px rgba(37, 99, 235, 0.18);
+  transform: scale(1.04);
 }
 
-.custom-checkbox:checked::after {
-  content: '✓';
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
+.custom-checkbox.checked svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.custom-checkbox svg {
+  width: 14px; height: 14px;
   color: white;
-  font-size: 12px;
-  font-weight: 700;
+  stroke-width: 3;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ─── PROGRESS BAR ─── */

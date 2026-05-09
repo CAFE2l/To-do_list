@@ -58,7 +58,11 @@ function handleDelete() {
       @click="emit('toggle', task.id, !task.completed)"
       class="custom-checkbox shrink-0"
       :class="{ 'checked': task.completed }"
-    ></button>
+    >
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+      </svg>
+    </button>
 
     <template v-if="editing">
       <input

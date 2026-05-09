@@ -140,7 +140,11 @@ const allCompleted = computed(
                                 <div
                                     class="custom-checkbox"
                                     :class="{ checked: task.completed }"
-                                ></div>
+                                >
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                </div>
                                 <span
                                     class="task-text text-sm text-white/80 group-hover:text-white/90 transition-colors"
                                     >{{ task.text }}</span

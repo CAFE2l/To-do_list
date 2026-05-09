@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import type { UserProfile } from '@/composables/useProfile'
-import type { UserLocation, SocialLinkIcon, SocialLink } from '@/types'
+import type { UserLocation, SocialLink } from '@/types'
 import { detectBrowserLocation, getLocationFromCoordinates } from '@/lib/geolocation'
 import StatusSelector from './StatusSelector.vue'
 import AvatarUploader from './AvatarUploader.vue'
@@ -23,8 +23,8 @@ const emit = defineEmits<{
   save: [data: Partial<UserProfile>]
   uploadAvatar: [file: File]
   removeAvatar: []
-  addSocialLink: [data: { title: string; url: string; icon: SocialLinkIcon }]
-  editSocialLink: [id: string, data: { title: string; url: string; icon: SocialLinkIcon }]
+  addSocialLink: [data: { title: string; url: string; icon: string; iconManuallySelected: boolean }]
+  editSocialLink: [id: string, data: { title: string; url: string; icon: string; iconManuallySelected?: boolean }]
   deleteSocialLink: [id: string]
 }>()
 
@@ -147,7 +147,7 @@ const roles = ['Student', 'Developer', 'Creator', 'Designer', 'Streamer', 'Teach
 
     <div class="pt-2 border-t border-white/[0.04]">
       <div class="grid md:grid-cols-2 gap-4">
-        <SocialLinkForm @add="(data) => emit('addSocialLink', data)" />
+        <SocialLinkForm :link-count="socialLinks.length" @add="(data) => emit('addSocialLink', data)" />
         <SocialLinkList
           :links="socialLinks"
           @edit="(id, data) => emit('editSocialLink', id, data)"
