@@ -1,6 +1,6 @@
 <img width="1664" height="928" alt="image" src="https://github.com/user-attachments/assets/6b57cdaa-c0aa-41e7-9d09-20f22ed6e05b" />
 
-<center><h1>tudy Overlay</h1></center>
+<center><h1>Study Overlay</h1></center>
 
 > Realtime futuristic OBS productivity overlays for Study With Me creators.
 
