@@ -1,4 +1,4 @@
-<img width="1280" height="592" alt="image" src="https://github.com/user-attachments/assets/2232bdf4-636c-4cf5-8146-ab08a434b8f6" /># <img src="./public/icons/study-overlay/icone.png" width="100" align="center" /> Study Overlay
+<img src="./public/icons/study-overlay/icone.png" width="100" align="center" /> Study Overlay
 
 > Realtime futuristic OBS productivity overlays for Study With Me creators.
 
@@ -176,7 +176,8 @@ The visual identity focuses on:
 ## OBS Overlay
 
 <p align="center">
-  <img src="./docs/screenshots/overlay.png" width="70%" />
+  <img width="436" height="327" alt="image" src="https://github.com/user-attachments/assets/d9009e54-d703-42e9-9c9b-e397239f95cb" />
+
 </p>
 
 ---
@@ -184,7 +185,7 @@ The visual identity focuses on:
 ## Profile System
 
 <p align="center">
-  <img src="./docs/screenshots/profile.png" width="100%" />
+   
 </p>
 
 ---
