@@ -1,4 +1,4 @@
-# <img src="./public/icons/study-overlay/icone.png" width="38" align="center" /> Study Overlay
+# <img src="./public/icons/study-overlay/icone.png" width="80" align="center" /> Study Overlay
 
 > Realtime futuristic OBS productivity overlays for Study With Me creators.
 
@@ -489,5 +489,5 @@ MIT License.
 > "Focus beautifully."
 
 <p align="center">
-  <img src="./public/icons/study-overlay/icone.png" width="90" />
+  <img src="./public/icons/study-overlay/banner.png" width="90" />
 </p>
