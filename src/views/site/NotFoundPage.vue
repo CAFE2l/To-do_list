@@ -1,0 +1,1 @@
+<template><main class="not-found"><div><p class="eyebrow">ERRO 404 • SINAL PERDIDO</p><h1>Essa camada saiu <em>do ar.</em></h1><p>A rota que você tentou acessar não está disponível no Overloom.</p><router-link to="/" class="site-btn primary">Voltar ao início ↗</router-link></div><strong>404</strong></main></template>

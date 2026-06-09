@@ -1,0 +1,1 @@
+<template><section class="widget donation-widget"><span class="donation-icon">◇</span><div><small>NOVA DOAÇÃO VIA PIX</small><h2>Marina apoiou a live</h2><p>“Seu conteúdo ajuda demais. Continue!”</p></div><strong>R$ 25,00</strong></section></template>
